@@ -242,6 +242,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/31/方形折角/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhoufan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡少文集">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/31/方形折角/" itemprop="url">方形折角</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-31T23:48:37+08:00">
+                2018-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="方形折角效果的实现与背后原理"><a href="#方形折角效果的实现与背后原理" class="headerlink" title="方形折角效果的实现与背后原理"></a>方形折角效果的实现与背后原理</h3><h4 id="一-源码"><a href="#一-源码" class="headerlink" title="一 . 源码"></a>一 . 源码</h4><p>闲话少说，先上代码以表敬意。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Page Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        .corner &#123;</span></span><br><span class="line"><span class="undefined">            position: absolute;</span></span><br><span class="line"><span class="undefined">            top: 50%;</span></span><br><span class="line"><span class="undefined">            left: 50%;</span></span><br><span class="line"><span class="undefined">            transform: translate(-50%, -50%);</span></span><br><span class="line"><span class="undefined">            width: 120px;</span></span><br><span class="line"><span class="undefined">            padding: 40px;</span></span><br><span class="line"><span class="undefined">            line-height: 120px;</span></span><br><span class="line"><span class="undefined">            text-align: center;</span></span><br><span class="line"><span class="undefined">            color: white;</span></span><br><span class="line"><span class="undefined">            font-size: 150%;</span></span><br><span class="line"><span class="undefined">            background: linear-gradient(-150deg, transparent 1.5em, yellowgreen 0);</span></span><br><span class="line"><span class="undefined">            border-radius: .5em;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        .corner::before &#123;</span></span><br><span class="line"><span class="undefined">            content: '';</span></span><br><span class="line"><span class="undefined">            position: absolute;</span></span><br><span class="line"><span class="undefined">            top: 0;</span></span><br><span class="line"><span class="undefined">            right: 0;</span></span><br><span class="line"><span class="undefined">            background: linear-gradient(to left bottom, transparent 50%,                 rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .4)) 100% 0 no-repeat;</span></span><br><span class="line"><span class="undefined">            width: 1.73em;</span></span><br><span class="line"><span class="undefined">            height: 3em;</span></span><br><span class="line"><span class="undefined">            transform: translateY(-1.3em) rotate(-30deg);</span></span><br><span class="line"><span class="undefined">            transform-origin: bottom right;</span></span><br><span class="line"><span class="undefined">            border-bottom-left-radius: inherit;</span></span><br><span class="line"><span class="undefined">            box-shadow: -.2em .2em .3em -.1em rgba(0, 0, 0, .15);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"corner"</span>&gt;</span>方形折角<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>代码实现的是一个方形折角的效果，主要是想以此总结一下CSS和伪元素的使用。</p>
+<h3 id="二-代码分析"><a href="#二-代码分析" class="headerlink" title="二. 代码分析"></a>二. 代码分析</h3><p>首先是一个借助了transform属性里面的translate值，实现div的垂直居中。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line"><span class="selector-tag">top</span>: 50%;</span><br><span class="line"><span class="selector-tag">left</span>: 50%;</span><br><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">translate</span>(<span class="selector-tag">-50</span>%, <span class="selector-tag">-50</span>%);</span><br></pre></td></tr></table></figure></p>
+<p>然后是一些小语法点。</p>
+<h4 id="2-1-单位问题。"><a href="#2-1-单位问题。" class="headerlink" title="2.1  单位问题。"></a>2.1  单位问题。</h4><p>像素px是相对于显示器屏幕分辨率而言的，因此缩放可能会出现问题。严格来说，css的一像素不等于显示器的一像素。css 中的 px 不是物理像素. css px 和物理像素的对应关系, 与 viewport 的缩放有关。在windows里，默认的显示设置中，把文字定义为96dpi。这说明了：1px＝1/96英寸；而1pt＝1/72英寸，可以得出，在本设置中1px＝0.75pt，字体9pt＝12px。但是，用户可以修改文字定义的dpi大小，例如改成144dpi，这样，1px＝0.5pt，字体9pt＝18px。原先用12px来组成的一个文字，现在需要18px来组成，px多了，文字就“大”了，更易阅读了。</p>
+<p>所以，px和pt的区别在于，px会随显示器的分辨率而改变，pt会随windows系统字体大小设置而改变。</p>
+<p>em是相对于当前对象内文本的字体尺寸。如当前对行内文本的字体尺寸未被人为设置，则相对于浏览器的默认字体尺寸。em 准确来说，<strong>relative to the parent element</strong>。有一个极端的例子，体现em的问题</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">body &#123; font-size:20px; &#125; </span><br><span class="line">div &#123; font-size:0.5em; &#125;</span><br><span class="line">则有</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> - 20px</span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 10px</span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 5px</span><br><span class="line">         <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 2.5px</span><br><span class="line">             <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 1.25px</span><br></pre></td></tr></table></figure>
+<p>而rem，是CSS3新增的一个相对单位（root em，根em），使用rem为元素设定字体大小时，仍然是相对大小，但相对的只是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。 准确说，<strong>always relative only to the root html element</strong>。<br>本文代码的0.5em，是相对于font-size大小的，浏览器一般默认是16px，font-size是24px，而border-radius是12px。</p>
+<h4 id="2-2-line-height"><a href="#2-2-line-height" class="headerlink" title="2.2  line-height"></a>2.2  line-height</h4><p>行高”顾名思意指一行文字的高度。具体来说是指两行文字间基线之间的距离。<br>div 的高度可以靠height撑开，也可以靠line-height。但是line-height不是靠文字撑起来的，而是靠在box模型中，有个line boxes，它可以包裹每行文字。一行文字一个line boxes。div的高度就是由一个一个line boxes的高度堆积而成。line boxes根据它包含的inline boxes里面谁的line-height值最高，就形成line boxes的高度。<br>一个不错的<a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html" target="_blank" rel="noopener">链接</a>，值得一看。<br>你可以有5种方式来定义line-height。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:normal;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:inherit;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:<span class="number">120%</span>;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:<span class="number">25px</span>;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:<span class="number">1.2</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>父元素的line-height设为px，子元素直接继承；设为%或者em，那么首先根据父元素的font-size，<br>结合比例算出px，给子元素继承line-height，设为纯数字，子元素的行高根据自己的font-size乘上数字得到，相对自适应。px em %时候后代不会随着后代自己的font-size来改变行高，直接继承他爹的。line-height设置为normal，就是数值1.2，一般认为1.5更理想。<br>行高还有一个特性，叫做垂直居中性。line-height的最终表现是通过line boxes实现的，而无论line boxes所占据的高度是多少（无论比文字大还是比文字小），其占据的空间都是与文字内容公用水平中垂线的，可以用来给文字进行垂直居中。</p>
+<p>接着是一些CSS3的新特性了。</p>
+<h4 id="2-3-linear-gradient属性"><a href="#2-3-linear-gradient属性" class="headerlink" title="2.3  linear-gradient属性"></a>2.3  linear-gradient属性</h4><p>linear-gradient 的可用值如下(MDN大法好)<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">linear-gradient</span>(  <span class="selector-attr">[ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]</span>? &lt;<span class="selector-tag">color-stop</span>&gt; <span class="selector-attr">[, &lt;color-stop&gt;]</span>+ )</span><br><span class="line">  \---------------------------------/ \----------------------------/</span><br><span class="line">    <span class="selector-tag">Definition</span> <span class="selector-tag">of</span> <span class="selector-tag">the</span> <span class="selector-tag">gradient</span> <span class="selector-tag">line</span>        <span class="selector-tag">List</span> <span class="selector-tag">of</span> <span class="selector-tag">color</span> <span class="selector-tag">stops</span>  </span><br><span class="line">where &lt;side-or-corner&gt; = [left | right] || [top | bottom] </span><br><span class="line">and &lt;color-stop&gt;     = &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?</span><br></pre></td></tr></table></figure></p>
+<p>这是正则的写法，？表示0或1，+表示1或者更多。<br>angle和side-or-corner有对应关系，The values to top, to bottom, to left, and to right are equivalent to the angles 0deg, 180deg, 270deg, and 90deg respectively.这里的角度是顺时针顺序来决定的，chrome里面to right 的to一定要加。紧接着后面是颜色以及其stop的位置，A color-stop’s <code>&lt;color&gt;</code> value, followed by an optional stop position (either a <code>&lt;percentage&gt;</code> or a <code>&lt;length&gt;</code> along the gradient’s axis).不过个人认为这个color-stop 叫法不是很恰当，理解成开始渐变的位置可能更贴切一些。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background</span><span class="selector-pseudo">:linear-gradient(-150deg</span>,<span class="selector-tag">transparent</span> 1<span class="selector-class">.5em</span>,<span class="selector-tag">yellowgreen</span> 0);</span><br></pre></td></tr></table></figure></p>
+<p>这一句渲染成了缺一个角的div，1.5em会使得渐变的效果消失，如果是15%，就会有渐变效果。<br>再看本文代码里的一个例子，画出一个渐变的阴影三角形（还是直角三角形）<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background</span>:</span><br><span class="line"><span class="selector-tag">linear-gradient</span>(<span class="selector-tag">to</span> <span class="selector-tag">left</span> <span class="selector-tag">bottom</span>,<span class="selector-tag">transparent</span> 50%, <span class="selector-tag">rgba</span>(0,0,0,<span class="selector-class">.2</span>) 0, <span class="selector-tag">rgba</span>(0,0,0,<span class="selector-class">.4</span>)) 100% 0 <span class="selector-tag">no-repeat</span>;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-4-transform"><a href="#2-4-transform" class="headerlink" title="2.4  transform"></a>2.4  transform</h4><p>首先是坐标系，x轴右为正，y轴下为正，z轴出为正。旋转时，正数是顺时针。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform: translateY(-1.3em) rotate(-30deg);     // rotate 正顺 负逆</span><br><span class="line">transform-origin: bottom right;  // 确定变换的中心，默认是物体的中心，这里变换                                                  是绕着物体的右下角</span><br></pre></td></tr></table></figure></p>
+<p>transform-origin属性让你可以更改一个元素变形的原点，可以设置数值px % 之类。</p>
+<h4 id="2-5-border-bottom-left-radius"><a href="#2-5-border-bottom-left-radius" class="headerlink" title="2.5  border-bottom-left-radius"></a>2.5  border-bottom-left-radius</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-bottom-left-radius: inherit;  //向 div 元素的before伪元素的左下角添加圆角边框</span><br></pre></td></tr></table></figure>
+<p>在本文例子的代码里，因为是这个三角形要模拟折角，所以其弧度应该和div的弧度一样，从而显得是折角。</p>
+<h4 id="2-6-box-shadow"><a href="#2-6-box-shadow" class="headerlink" title="2.6  box-shadow"></a>2.6  box-shadow</h4><p>按照MDN，box-shadow的取值为<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">none | [inset? &amp;&amp; [ &lt;offset-x&gt; &lt;offset-y&gt; &lt;blur-radius&gt;? &lt;spread-radius&gt;? &lt;color&gt;? ] ]#</span><br><span class="line">？ ：0<span class="selector-tag">-1</span>个      + ：1<span class="selector-tag">-</span>多个</span><br></pre></td></tr></table></figure></p>
+<p>inset<br>这个参数有的话，表示阴影在边框内，默认是没有，阴影在边框外<br><code>&lt;offset-x&gt; &lt;offset-y&gt;</code><br>这是头两个 <code>&lt;length&gt;</code>值，用来设置阴影偏移量。<code>&lt;offset-x&gt;</code> 设置水平偏移量，如果是负值则阴影位于元素左边。 <code>&lt;offset-y&gt;</code>设置垂直偏移量，如果是负值则阴影位于元素上面<br><code>&lt;blur-radius&gt;</code><br>这是第三个 <code>&lt;length&gt;</code> 值。值越大，模糊面积越大，阴影就越大越淡<br><code>&lt;spread-radius&gt;</code>11<br>这是第四个 <code>&lt;length&gt;</code>值。取正值时，阴影扩大；取负值时，阴影.收缩。默认为0，此时阴影与元素同样大。<br>color：颜色值</p>
+<h4 id="2-7-before伪元素"><a href="#2-7-before伪元素" class="headerlink" title="2.7  before伪元素"></a>2.7  before伪元素</h4><p>In CSS, ::before creates a pseudo-element that is the first child of the selected element. It is often used to add cosmetic content to an element with the content property. It is inline by default.<br>还是觉得MDN的定义准确，::before在被选择的元素的首个孩子节点处创建一个伪元素，一般使用 <strong>content</strong> 属性来给元素添加内容，默认的before伪元素是行内元素。after以此类比，可得定义。<br>MDN上有一个使用before实现列表选项选中时，出现对勾符号的效果，对勾就是使用before添加的，对勾的形状居然是使用border的两个相邻边，然后rotate来模拟得到的！神奇！ <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/::before" target="_blank" rel="noopener">传送门</a> 在此！</p>
+<h4 id="2-8-meta元素"><a href="#2-8-meta元素" class="headerlink" title="2.8  meta元素"></a>2.8  meta元素</h4><p>例子里面的meta元素，写法如下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这个找了半天解释，后来觉得stackoverflow说的最好。摘录如下：</p>
+<blockquote>
+<blockquote>
+<p>Edge mode tells Internet Explorer to display content in the highest mode available. With Internet Explorer 9, this is equivalent to IE9 mode. If a future release of Internet Explorer supported a higher compatibility mode, pages set to edge mode would appear in the highest mode supported by that version. Those same pages would still appear in IE9 mode when viewed with Internet Explorer 9. Internet Explorer supports a number of document compatibility modes that enable different features and can affect the way content is displayed。<br>If you need to support IE 9 or IE 8, then I would recommend using the tag. If you only support the latest browsers (IE 11 and/or Edge) then I would consider dropping this tag altogether.</p>
+</blockquote>
+</blockquote>
+<p>我总结一下，就是这种写法使得IE浏览器按自己能够达到的最高配置来渲染页面，另外IE8以下就gg。<br>另外还有一种写法，针对chrome的插件应用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=Edge,chrome=1"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<blockquote>
+<p>Google Chrome Frame is an open source browser plug-in. Users who have the plug-in installed have access to Google Chrome’s open web technologies and speedy JavaScript engine when they open pages in the browser.<br>Google Chrome Frame seamlessly enhances your browsing experience in Internet Explorer. It displays Google Chrome Frame enabled sites using Google Chrome’s rendering technology, giving you access to the latest HTML5 features as well as Google Chrome’s performance and security features without in any way interrupting your usual browser usage.<br>When Google Chrome Frame is installed, the web just gets better without you having to think about it.</p>
+</blockquote>
+</blockquote>
+<p>额，有点云里雾里，总之是为了适配谷歌自家的插件喽。。。</p>
+<h3 id="三-小结"><a href="#三-小结" class="headerlink" title="三. 小结"></a>三. 小结</h3><p>总之，方形折角的做法，是先做一个缺角的div，然后做一个阴影三角形，旋转到缺口之下，从而得到结果，核心是CSS3的新特性和before伪元素的使用。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/vue-router笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -714,7 +870,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
