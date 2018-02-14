@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="排序算法一 . 前言排序算法是数据处理中的经常执行的操作。高效率的排序应当尽可能减少比较次数和数据的移动次数。本文主要是探讨内排序，不涉及使用外存的外排序，主要是七种排序方法，包括冒泡，简单选择，直接插入，希尔，堆，归并，快速。 二. 七类算法1.  冒泡排序冒泡排序思路是：首先将序列当中的左右元素，依次比较，保证右边">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序">
+<meta property="og:url" content="http://yoursite.com/2018/02/12/排序/index.html">
+<meta property="og:site_name" content="凡少文集">
+<meta property="og:description" content="排序算法一 . 前言排序算法是数据处理中的经常执行的操作。高效率的排序应当尽可能减少比较次数和数据的移动次数。本文主要是探讨内排序，不涉及使用外存的外排序，主要是七种排序方法，包括冒泡，简单选择，直接插入，希尔，堆，归并，快速。 二. 七类算法1.  冒泡排序冒泡排序思路是：首先将序列当中的左右元素，依次比较，保证右边的元素始终大于左边的元素；对序列当中剩下的n-1个元素继续进行左右元素比较。对于">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/maopao1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/maopao2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/choose.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/insert1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/insert2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/shell.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/heap1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/heap2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/02/12/排序/table.PNG">
+<meta property="og:updated_time" content="2018-02-13T13:07:30.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序">
+<meta name="twitter:description" content="排序算法一 . 前言排序算法是数据处理中的经常执行的操作。高效率的排序应当尽可能减少比较次数和数据的移动次数。本文主要是探讨内排序，不涉及使用外存的外排序，主要是七种排序方法，包括冒泡，简单选择，直接插入，希尔，堆，归并，快速。 二. 七类算法1.  冒泡排序冒泡排序思路是：首先将序列当中的左右元素，依次比较，保证右边的元素始终大于左边的元素；对序列当中剩下的n-1个元素继续进行左右元素比较。对于">
+<meta name="twitter:image" content="http://yoursite.com/2018/02/12/排序/maopao1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/12/排序/"/>
+
+
+
+
+
+  <title>排序 | 凡少文集</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凡少文集</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">各类博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/12/排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhoufan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡少文集">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">排序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T09:34:23+08:00">
+                2018-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><h4 id="一-前言"><a href="#一-前言" class="headerlink" title="一 . 前言"></a>一 . 前言</h4><p>排序算法是数据处理中的经常执行的操作。高效率的排序应当尽可能减少比较次数和数据的移动次数。本文主要是探讨内排序，不涉及使用外存的外排序，主要是七种排序方法，包括冒泡，简单选择，直接插入，希尔，堆，归并，快速。</p>
+<h4 id="二-七类算法"><a href="#二-七类算法" class="headerlink" title="二. 七类算法"></a>二. 七类算法</h4><h5 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1.  冒泡排序"></a>1.  冒泡排序</h5><p>冒泡排序思路是：首先将序列当中的左右元素，依次比较，保证右边的元素始终大于左边的元素；对序列当中剩下的n-1个元素继续进行左右元素比较。对于长度为n的序列，一共需要执行n-1轮比较。</p>
+<p>比较时会进行两轮的遍历，因此时间复杂度为<code>O(n^2)</code>。<br>最基本的冒泡排序长这样， </p>
+<p><strong>注意。。大话数据结构的代码里面，数组的第一位是一个机动兵，可以作为临时变量或者哨兵。</strong></p>
+<p><img src="/2018/02/12/排序/maopao1.PNG" alt="maopao1"></p>
+<p> 对于冒泡有不少可以改进的地方，第一是第二次遍历可以从后往前来，这样才是把小的数字从后面升到前面了，减少不必要的比较。第二是flag的确立，比如本来要排序的一队数字就是有序的，那就没必要比较了，用flag来判断。</p>
+<p><img src="/2018/02/12/排序/maopao2.PNG" alt="maopao2"></p>
+<h5 id="2-简单选择排序"><a href="#2-简单选择排序" class="headerlink" title="2.  简单选择排序"></a>2.  简单选择排序</h5><p>这是一个遍历关键字，找最小的过程。时间复杂度<code>O(n^2)</code>，性能比冒泡好一点。</p>
+<p>代码如下，</p>
+<p> <img src="/2018/02/12/排序/choose.PNG" alt="choose"></p>
+<h5 id="3-直接插入排序"><a href="#3-直接插入排序" class="headerlink" title="3.  直接插入排序"></a>3.  直接插入排序</h5><p>空间上需要一个辅助的记录空间，时间复杂度是O(n^2)，但是比前两个性能要好一些。<br>代码如下，体现了插入的概念，</p>
+<p> <img src="/2018/02/12/排序/insert1.PNG" alt="insert1"><img src="/2018/02/12/排序/insert2.PNG" alt="insert2"></p>
+<p>利用辅助位完成了排序。</p>
+<h5 id="4-希尔排序"><a href="#4-希尔排序" class="headerlink" title="4.  希尔排序"></a>4.  希尔排序</h5><p>希尔排序是针对直接插入排序的改进，它的算法思想：将待排序数组按照步长gap进行分组，然后将每组的元素利用<strong>直接插入排序</strong>的方法进行排序；每次将gap折半减小，循环上述操作；当gap=1时，利用直接插入，完成排序。<br>时间复杂度是O(n^1.5)，好过上面三个，它是一种不稳定的排序算法。</p>
+<p>代码如下， <img src="/2018/02/12/排序/shell.PNG" alt="shell"></p>
+<h5 id="5-堆排序"><a href="#5-堆排序" class="headerlink" title="5.  堆排序"></a>5.  堆排序</h5><p>堆排序是针对直接选择排序的改进。首先是介绍堆这种数据结构。</p>
+<p>堆可以表示为完全二叉树。特别重要的一点性质：任意的叶子节点小于（或大于）它所有的父节点。对此，又分为大顶堆和小顶堆，大顶堆要求节点的元素都要大于其孩子，小顶堆要求节点元素都小于其左右孩子，两者对左右孩子的大小关系不做任何要求。</p>
+<p>利用堆排序，就是基于大顶堆或者小顶堆的一种排序方法。</p>
+<p>算法的基本思想：使用大顶堆来完成</p>
+<ol>
+<li><p>首先将序列构建成为大顶堆；</p>
+<p>这样满足了大顶堆的性质：位于根节点的元素一定是当前序列的最大值</p>
+</li>
+<li><p>取出当前大顶堆的根节点，将其与序列末尾元素进行交换；</p>
+<p>此时：序列末尾的元素为已排序的最大值；由于交换了元素，当前位于根节点的堆并不一定满足大顶堆的性质</p>
+</li>
+<li><p>对上一步交换后的n-1个序列元素进行调整，使其满足大顶堆的性质；即重新构建大顶堆。</p>
+</li>
+<li><p>重复2.3步骤，直至堆中只有1个元素为止</p>
+</li>
+</ol>
+<p>代码如下，</p>
+<p><img src="/2018/02/12/排序/heap1.PNG" alt="heap1"></p>
+<p><img src="/2018/02/12/排序/heap2.PNG" alt="heap2"></p>
+<p>时间复杂度是O(nlogn) ，需要一个用来交换的暂存单元，是不稳定的排序。图2的第5行，<code>2*s</code>，是因为将完全二叉树按照层序遍历的顺序标号，那么某个结点序号为s，则左孩子序号是<code>2s</code>，右孩纸是<code>2s+1</code>。由于完全二叉树第i个节点到根节点的距离是log2i下取整后加一（深度），而需要设置堆顶n-1次，合起来得到时间复杂度O(nlogn)。</p>
+<h5 id="6-归并排序"><a href="#6-归并排序" class="headerlink" title="6.  归并排序"></a>6.  归并排序</h5><p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。通过先递归的分解数列，再合并数列就完成了归并排序。<br>归并排序的效率是比较高的，设数列长为N，将数列分开成小数列一共要logN步，每步都是一个合并有序数列的过程，时间复杂度可以记为O(N)，故一共为O(N*logN)。</p>
+<p>具体来说，考虑下如何将二个有序数列合并。其做法是，只要从比较二个数列的第一个数，谁小就先取谁，取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个数列的数据依次取出即可。</p>
+<p>具体实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将有二个有序数列a[first...mid]和a[mid...last]合并。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergearray</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> mid, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i = first, j = mid + <span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">int</span> m = mid,   n = last;  </span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> (i &lt;= m &amp;&amp; j &lt;= n)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt;= a[j])  </span><br><span class="line">            temp[k++] = a[i++];  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            temp[k++] = a[j++];  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> (i &lt;= m)  </span><br><span class="line">        temp[k++] = a[i++];  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> (j &lt;= n)  </span><br><span class="line">        temp[k++] = a[j++];  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)  </span><br><span class="line">        a[first + i] = temp[i];  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (first &lt; last)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">int</span> mid = (first + last) / <span class="number">2</span>;  </span><br><span class="line">        mergesort(a, first, mid, temp);    <span class="comment">//左边有序  </span></span><br><span class="line">        mergesort(a, mid + <span class="number">1</span>, last, temp); <span class="comment">//右边有序  </span></span><br><span class="line">        mergearray(a, first, mid, last, temp); <span class="comment">//再将二个有序数列合并  </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>[n];  </span><br><span class="line">    <span class="keyword">if</span> (p == <span class="literal">NULL</span>)  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">    mergesort(a, <span class="number">0</span>, n - <span class="number">1</span>, p);  </span><br><span class="line">    <span class="keyword">delete</span>[] p;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，可以使用迭代来非递归地进行排序，降低空间复杂度，具体请阅读大话数据结构的相关章节。</p>
+<h5 id="7-快速排序"><a href="#7-快速排序" class="headerlink" title="7.  快速排序"></a>7.  快速排序</h5><p>快排是对于冒泡的改进和加强。通过一趟排序将待排序的记录分割成独立的两部分，其中一部分记录的关键字均比另一部分记录的关键字小，则可分别对于这两部分记录继续进行排序，以达到整个序列有序的目的。<br>快速排序是C.R.A.Hoare于1962年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法。<br>该方法的基本思想是：<br>1．先从数列中取出一个数作为基准数。<br>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。<br>3．再对左右区间重复第二步，直到各区间只有一个数。<br>一个可以参考的实现如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//快速排序  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> s[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (l &lt; r)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">int</span> i = l, j = r, x = s[l];  </span><br><span class="line">        <span class="keyword">while</span> (i &lt; j)  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="keyword">while</span>(i &lt; j &amp;&amp; s[j] &gt;= x) <span class="comment">// 从右向左找第一个小于x的数  </span></span><br><span class="line">                j--;    </span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)   </span><br><span class="line">                s[i++] = s[j];  </span><br><span class="line">              </span><br><span class="line">            <span class="keyword">while</span>(i &lt; j &amp;&amp; s[i] &lt; x) <span class="comment">// 从左向右找第一个大于等于x的数  </span></span><br><span class="line">                i++;    </span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)   </span><br><span class="line">                s[j--] = s[i];  </span><br><span class="line">        &#125;  </span><br><span class="line">        s[i] = x;  </span><br><span class="line">        quick_sort(s, l, i - <span class="number">1</span>); <span class="comment">// 递归调用   </span></span><br><span class="line">        quick_sort(s, i + <span class="number">1</span>, r);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个实现是以第一个数为基准数的。有的实现是以中间的数作为基准数的，直接将中间的数和第一个数进行交换就可以了。快排时先由右往左，然后由左向右，如此交替进行。</p>
+<p>快排是不稳定的排序方法，时间复杂度为O(nlogn)。</p>
+<p>优化思路：第一是基准数的选取，可以先选出3个数，取其平均数来作为基准，尽可能让这个基准数靠近中央。第二是递归方面，尽量使用尾递归。</p>
+<h4 id="三-总结"><a href="#三-总结" class="headerlink" title="三 . 总结"></a>三 . 总结</h4><p>一图胜千言啊，下图总结了七类排序方法的特性。</p>
+<p> <img src="/2018/02/12/排序/table.PNG" alt="table"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/09/web安全/" rel="next" title="web安全">
+                <i class="fa fa-chevron-left"></i> web安全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhoufan</p>
+              <p class="site-description motion-element" itemprop="description">记录我的点滴</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序算法"><span class="nav-number">1.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-前言"><span class="nav-number">1.1.</span> <span class="nav-text">一 . 前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-七类算法"><span class="nav-number">1.2.</span> <span class="nav-text">二. 七类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-冒泡排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.  冒泡排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-简单选择排序"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.  简单选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-直接插入排序"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.  直接插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-希尔排序"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.  希尔排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-堆排序"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.  堆排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-归并排序"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.  归并排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-快速排序"><span class="nav-number">1.2.7.</span> <span class="nav-text">7.  快速排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-总结"><span class="nav-number">1.3.</span> <span class="nav-text">三 . 总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhoufan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

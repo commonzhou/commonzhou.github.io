@@ -242,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/31/方形折角/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/12/排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhoufan">
@@ -261,7 +261,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/31/方形折角/" itemprop="url">方形折角</a></h1>
+                <a class="post-title-link" href="/2018/02/12/排序/" itemprop="url">排序</a></h1>
         
 
         <div class="post-meta">
@@ -273,8 +273,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-31T23:48:37+08:00">
-                2018-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T09:34:23+08:00">
+                2018-02-12
               </time>
             
 
@@ -313,44 +313,181 @@
       
         
           
-            <h3 id="方形折角效果的实现与背后原理"><a href="#方形折角效果的实现与背后原理" class="headerlink" title="方形折角效果的实现与背后原理"></a>方形折角效果的实现与背后原理</h3><h4 id="一-源码"><a href="#一-源码" class="headerlink" title="一 . 源码"></a>一 . 源码</h4><p>闲话少说，先上代码以表敬意。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Page Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        .corner &#123;</span></span><br><span class="line"><span class="undefined">            position: absolute;</span></span><br><span class="line"><span class="undefined">            top: 50%;</span></span><br><span class="line"><span class="undefined">            left: 50%;</span></span><br><span class="line"><span class="undefined">            transform: translate(-50%, -50%);</span></span><br><span class="line"><span class="undefined">            width: 120px;</span></span><br><span class="line"><span class="undefined">            padding: 40px;</span></span><br><span class="line"><span class="undefined">            line-height: 120px;</span></span><br><span class="line"><span class="undefined">            text-align: center;</span></span><br><span class="line"><span class="undefined">            color: white;</span></span><br><span class="line"><span class="undefined">            font-size: 150%;</span></span><br><span class="line"><span class="undefined">            background: linear-gradient(-150deg, transparent 1.5em, yellowgreen 0);</span></span><br><span class="line"><span class="undefined">            border-radius: .5em;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        .corner::before &#123;</span></span><br><span class="line"><span class="undefined">            content: '';</span></span><br><span class="line"><span class="undefined">            position: absolute;</span></span><br><span class="line"><span class="undefined">            top: 0;</span></span><br><span class="line"><span class="undefined">            right: 0;</span></span><br><span class="line"><span class="undefined">            background: linear-gradient(to left bottom, transparent 50%, rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .4)) 100% 0 no-repeat;</span></span><br><span class="line"><span class="undefined">            width: 1.73em;</span></span><br><span class="line"><span class="undefined">            height: 3em;</span></span><br><span class="line"><span class="undefined">            transform: translateY(-1.3em) rotate(-30deg);</span></span><br><span class="line"><span class="undefined">            transform-origin: bottom right;</span></span><br><span class="line"><span class="undefined">            border-bottom-left-radius: inherit;</span></span><br><span class="line"><span class="undefined">            box-shadow: -.2em .2em .3em -.1em rgba(0, 0, 0, .15);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"corner"</span>&gt;</span>方形折角<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>代码实现的是一个方形折角的效果，主要是想以此总结一下CSS和伪元素的使用。</p>
-<h3 id="二-代码分析"><a href="#二-代码分析" class="headerlink" title="二. 代码分析"></a>二. 代码分析</h3><p>首先是一个借助了transform属性里面的translate值，实现div的垂直居中。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line"><span class="selector-tag">top</span>: 50%;</span><br><span class="line"><span class="selector-tag">left</span>: 50%;</span><br><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">translate</span>(<span class="selector-tag">-50</span>%, <span class="selector-tag">-50</span>%);</span><br></pre></td></tr></table></figure></p>
-<p>然后是一些小语法点。</p>
-<h4 id="2-1-单位问题。"><a href="#2-1-单位问题。" class="headerlink" title="2.1  单位问题。"></a>2.1  单位问题。</h4><p>像素px是相对于显示器屏幕分辨率而言的，因此缩放可能会出现问题。严格来说，css的一像素不等于显示器的一像素。css 中的 px 不是物理像素. css px 和物理像素的对应关系, 与 viewport 的缩放有关。在windows里，默认的显示设置中，把文字定义为96dpi。这说明了：1px＝1/96英寸；而1pt＝1/72英寸，可以得出，在本设置中1px＝0.75pt，字体9pt＝12px。但是，用户可以修改文字定义的dpi大小，例如改成144dpi，这样，1px＝0.5pt，字体9pt＝18px。原先用12px来组成的一个文字，现在需要18px来组成，px多了，文字就“大”了，更易阅读了。</p>
-<p>所以，px和pt的区别在于，px会随显示器的分辨率而改变，pt会随windows系统字体大小设置而改变。</p>
-<p>em是相对于当前对象内文本的字体尺寸。如当前对行内文本的字体尺寸未被人为设置，则相对于浏览器的默认字体尺寸。em 准确来说，<strong>relative to the parent element</strong>。有一个极端的例子，体现em的问题</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">body &#123; font-size:20px; &#125; </span><br><span class="line">div &#123; font-size:0.5em; &#125;</span><br><span class="line">则有</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> - 20px</span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 10px</span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 5px</span><br><span class="line">         <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 2.5px</span><br><span class="line">             <span class="tag">&lt;<span class="name">div</span>&gt;</span> - 1.25px</span><br></pre></td></tr></table></figure>
-<p>而rem，是CSS3新增的一个相对单位（root em，根em），使用rem为元素设定字体大小时，仍然是相对大小，但相对的只是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。 准确说，<strong>always relative only to the root html element</strong>。<br>本文代码的0.5em，是相对于font-size大小的，浏览器一般默认是16px，font-size是24px，而border-radius是12px。</p>
-<h4 id="2-2-line-height"><a href="#2-2-line-height" class="headerlink" title="2.2  line-height"></a>2.2  line-height</h4><p>行高”顾名思意指一行文字的高度。具体来说是指两行文字间基线之间的距离。<br>div 的高度可以靠height撑开，也可以靠line-height。但是line-height不是靠文字撑起来的，而是靠在box模型中，有个line boxes，它可以包裹每行文字。一行文字一个line boxes。div的高度就是由一个一个line boxes的高度堆积而成。line boxes根据它包含的inline boxes里面谁的line-height值最高，就形成line boxes的高度。<br>一个不错的<a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html" target="_blank" rel="noopener">链接</a>，值得一看。<br>你可以有5种方式来定义line-height。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:normal;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:inherit;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:<span class="number">120%</span>;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:<span class="number">25px</span>;&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">line-height</span>:<span class="number">1.2</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>父元素的line-height设为px，子元素直接继承；设为%或者em，那么首先根据父元素的font-size，<br>结合比例算出px，给子元素继承line-height，设为纯数字，子元素的行高根据自己的font-size乘上数字得到，相对自适应。px em %时候后代不会随着后代自己的font-size来改变行高，直接继承他爹的。line-height设置为normal，就是数值1.2，一般认为1.5更理想。<br>行高还有一个特性，叫做垂直居中性。line-height的最终表现是通过line boxes实现的，而无论line boxes所占据的高度是多少（无论比文字大还是比文字小），其占据的空间都是与文字内容公用水平中垂线的，可以用来给文字进行垂直居中。</p>
-<p>接着是一些CSS3的新特性了。</p>
-<h4 id="2-3-linear-gradient属性"><a href="#2-3-linear-gradient属性" class="headerlink" title="2.3  linear-gradient属性"></a>2.3  linear-gradient属性</h4><p>linear-gradient 的可用值如下(MDN大法好)<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">linear-gradient</span>(  <span class="selector-attr">[ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]</span>? &lt;<span class="selector-tag">color-stop</span>&gt; <span class="selector-attr">[, &lt;color-stop&gt;]</span>+ )</span><br><span class="line">  \---------------------------------/ \----------------------------/</span><br><span class="line">    <span class="selector-tag">Definition</span> <span class="selector-tag">of</span> <span class="selector-tag">the</span> <span class="selector-tag">gradient</span> <span class="selector-tag">line</span>        <span class="selector-tag">List</span> <span class="selector-tag">of</span> <span class="selector-tag">color</span> <span class="selector-tag">stops</span>  </span><br><span class="line">where &lt;side-or-corner&gt; = [left | right] || [top | bottom] </span><br><span class="line">and &lt;color-stop&gt;     = &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?</span><br></pre></td></tr></table></figure></p>
-<p>这是正则的写法，？表示0或1，+表示1或者更多。<br>angle和side-or-corner有对应关系，The values to top, to bottom, to left, and to right are equivalent to the angles 0deg, 180deg, 270deg, and 90deg respectively.这里的角度是顺时针顺序来决定的，chrome里面to right 的to一定要加。紧接着后面是颜色以及其stop的位置，A color-stop’s <code>&lt;color&gt;</code> value, followed by an optional stop position (either a <code>&lt;percentage&gt;</code> or a <code>&lt;length&gt;</code> along the gradient’s axis).不过个人认为这个color-stop 叫法不是很恰当，理解成开始渐变的位置可能更贴切一些。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background</span><span class="selector-pseudo">:linear-gradient(-150deg</span>,<span class="selector-tag">transparent</span> 1<span class="selector-class">.5em</span>,<span class="selector-tag">yellowgreen</span> 0);</span><br></pre></td></tr></table></figure></p>
-<p>这一句渲染成了缺一个角的div，1.5em会使得渐变的效果消失，如果是15%，就会有渐变效果。<br>再看本文代码里的一个例子，画出一个渐变的阴影三角形（还是直角三角形）<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background</span>:</span><br><span class="line"><span class="selector-tag">linear-gradient</span>(<span class="selector-tag">to</span> <span class="selector-tag">left</span> <span class="selector-tag">bottom</span>,<span class="selector-tag">transparent</span> 50%, <span class="selector-tag">rgba</span>(0,0,0,<span class="selector-class">.2</span>) 0, <span class="selector-tag">rgba</span>(0,0,0,<span class="selector-class">.4</span>)) 100% 0 <span class="selector-tag">no-repeat</span>;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-4-transform"><a href="#2-4-transform" class="headerlink" title="2.4  transform"></a>2.4  transform</h4><p>首先是坐标系，x轴右为正，y轴下为正，z轴出为正。旋转时，正数是顺时针。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> transform: translateY(-1.3em) rotate(-30deg);     // rotate 正顺 负逆</span><br><span class="line"> <span class="selector-tag">transform-origin</span>: <span class="selector-tag">bottom</span> <span class="selector-tag">right</span>;  </span><br><span class="line">// 确定变换的中心，默认是物体的中心，这里变换是绕着物体的右下角</span><br></pre></td></tr></table></figure></p>
-<p>transform-origin属性让你可以更改一个元素变形的原点，可以设置数值px % 之类。</p>
-<h4 id="2-5-border-bottom-left-radius"><a href="#2-5-border-bottom-left-radius" class="headerlink" title="2.5  border-bottom-left-radius"></a>2.5  border-bottom-left-radius</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-bottom-left-radius: inherit;  //向 div 元素的before伪元素的左下角添加圆角边框</span><br></pre></td></tr></table></figure>
-<p>在本文例子的代码里，因为是这个三角形要模拟折角，所以其弧度应该和div的弧度一样，从而显得是折角。</p>
-<h4 id="2-6-box-shadow"><a href="#2-6-box-shadow" class="headerlink" title="2.6  box-shadow"></a>2.6  box-shadow</h4><p>按照MDN，box-shadow的取值为<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">none | [inset? &amp;&amp; [ &lt;offset-x&gt; &lt;offset-y&gt; &lt;blur-radius&gt;? &lt;spread-radius&gt;? &lt;color&gt;? ] ]#</span><br><span class="line">？ ：0<span class="selector-tag">-1</span>个      + ：1<span class="selector-tag">-</span>多个</span><br></pre></td></tr></table></figure></p>
-<p>inset<br>这个参数有的话，表示阴影在边框内，默认是没有，阴影在边框外<br><code>&lt;offset-x&gt; &lt;offset-y&gt;</code><br>这是头两个 <code>&lt;length&gt;</code>值，用来设置阴影偏移量。<code>&lt;offset-x&gt;</code> 设置水平偏移量，如果是负值则阴影位于元素左边。 <code>&lt;offset-y&gt;</code>设置垂直偏移量，如果是负值则阴影位于元素上面<br><code>&lt;blur-radius&gt;</code><br>这是第三个 <code>&lt;length&gt;</code> 值。值越大，模糊面积越大，阴影就越大越淡<br><code>&lt;spread-radius&gt;</code>11<br>这是第四个 <code>&lt;length&gt;</code>值。取正值时，阴影扩大；取负值时，阴影.收缩。默认为0，此时阴影与元素同样大。<br>color：颜色值</p>
-<h4 id="2-7-before伪元素"><a href="#2-7-before伪元素" class="headerlink" title="2.7  before伪元素"></a>2.7  before伪元素</h4><p>In CSS, ::before creates a pseudo-element that is the first child of the selected element. It is often used to add cosmetic content to an element with the content property. It is inline by default.<br>还是觉得MDN的定义准确，::before在被选择的元素的首个孩子节点处创建一个伪元素，一般使用 <strong>content</strong> 属性来给元素添加内容，默认的before伪元素是行内元素。after以此类比，可得定义。<br>MDN上有一个使用before实现列表选项选中时，出现对勾符号的效果，对勾就是使用before添加的，对勾的形状居然是使用border的两个相邻边，然后rotate来模拟得到的！神奇！ <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/::before" target="_blank" rel="noopener">传送门</a> 在此！</p>
-<h4 id="2-8-meta元素"><a href="#2-8-meta元素" class="headerlink" title="2.8  meta元素"></a>2.8  meta元素</h4><p>例子里面的meta元素，写法如下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>这个找了半天解释，后来觉得stackoverflow说的最好。摘录如下：</p>
-<blockquote>
-<blockquote>
-<p>Edge mode tells Internet Explorer to display content in the highest mode available. With Internet Explorer 9, this is equivalent to IE9 mode. If a future release of Internet Explorer supported a higher compatibility mode, pages set to edge mode would appear in the highest mode supported by that version. Those same pages would still appear in IE9 mode when viewed with Internet Explorer 9. Internet Explorer supports a number of document compatibility modes that enable different features and can affect the way content is displayed。<br>If you need to support IE 9 or IE 8, then I would recommend using the tag. If you only support the latest browsers (IE 11 and/or Edge) then I would consider dropping this tag altogether.</p>
-</blockquote>
-</blockquote>
-<p>我总结一下，就是这种写法使得IE浏览器按自己能够达到的最高配置来渲染页面，另外IE8以下就gg。<br>另外还有一种写法，针对chrome的插件应用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=Edge,chrome=1"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<blockquote>
-<p>Google Chrome Frame is an open source browser plug-in. Users who have the plug-in installed have access to Google Chrome’s open web technologies and speedy JavaScript engine when they open pages in the browser.<br>Google Chrome Frame seamlessly enhances your browsing experience in Internet Explorer. It displays Google Chrome Frame enabled sites using Google Chrome’s rendering technology, giving you access to the latest HTML5 features as well as Google Chrome’s performance and security features without in any way interrupting your usual browser usage.<br>When Google Chrome Frame is installed, the web just gets better without you having to think about it.</p>
-</blockquote>
-</blockquote>
-<p>额，有点云里雾里，总之是为了适配谷歌自家的插件喽。。。</p>
-<h3 id="三-小结"><a href="#三-小结" class="headerlink" title="三. 小结"></a>三. 小结</h3><p>总之，方形折角的做法，是先做一个缺角的div，然后做一个阴影三角形，旋转到缺口之下，从而得到结果，核心是CSS3的新特性和before伪元素的使用。</p>
+            <h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><h4 id="一-前言"><a href="#一-前言" class="headerlink" title="一 . 前言"></a>一 . 前言</h4><p>排序算法是数据处理中的经常执行的操作。高效率的排序应当尽可能减少比较次数和数据的移动次数。本文主要是探讨内排序，不涉及使用外存的外排序，主要是七种排序方法，包括冒泡，简单选择，直接插入，希尔，堆，归并，快速。</p>
+<h4 id="二-七类算法"><a href="#二-七类算法" class="headerlink" title="二. 七类算法"></a>二. 七类算法</h4><h5 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1.  冒泡排序"></a>1.  冒泡排序</h5><p>冒泡排序思路是：首先将序列当中的左右元素，依次比较，保证右边的元素始终大于左边的元素；对序列当中剩下的n-1个元素继续进行左右元素比较。对于长度为n的序列，一共需要执行n-1轮比较。</p>
+<p>比较时会进行两轮的遍历，因此时间复杂度为<code>O(n^2)</code>。<br>最基本的冒泡排序长这样， </p>
+<p><strong>注意。。大话数据结构的代码里面，数组的第一位是一个机动兵，可以作为临时变量或者哨兵。</strong></p>
+<p><img src="/2018/02/12/排序/maopao1.PNG" alt="maopao1"></p>
+<p> 对于冒泡有不少可以改进的地方，第一是第二次遍历可以从后往前来，这样才是把小的数字从后面升到前面了，减少不必要的比较。第二是flag的确立，比如本来要排序的一队数字就是有序的，那就没必要比较了，用flag来判断。</p>
+<p><img src="/2018/02/12/排序/maopao2.PNG" alt="maopao2"></p>
+<h5 id="2-简单选择排序"><a href="#2-简单选择排序" class="headerlink" title="2.  简单选择排序"></a>2.  简单选择排序</h5><p>这是一个遍历关键字，找最小的过程。时间复杂度<code>O(n^2)</code>，性能比冒泡好一点。</p>
+<p>代码如下，</p>
+<p> <img src="/2018/02/12/排序/choose.PNG" alt="choose"></p>
+<h5 id="3-直接插入排序"><a href="#3-直接插入排序" class="headerlink" title="3.  直接插入排序"></a>3.  直接插入排序</h5><p>空间上需要一个辅助的记录空间，时间复杂度是O(n^2)，但是比前两个性能要好一些。<br>代码如下，体现了插入的概念，</p>
+<p> <img src="/2018/02/12/排序/insert1.PNG" alt="insert1"><img src="/2018/02/12/排序/insert2.PNG" alt="insert2"></p>
+<p>利用辅助位完成了排序。</p>
+<h5 id="4-希尔排序"><a href="#4-希尔排序" class="headerlink" title="4.  希尔排序"></a>4.  希尔排序</h5><p>希尔排序是针对直接插入排序的改进，它的算法思想：将待排序数组按照步长gap进行分组，然后将每组的元素利用<strong>直接插入排序</strong>的方法进行排序；每次将gap折半减小，循环上述操作；当gap=1时，利用直接插入，完成排序。<br>时间复杂度是O(n^1.5)，好过上面三个，它是一种不稳定的排序算法。</p>
+<p>代码如下， <img src="/2018/02/12/排序/shell.PNG" alt="shell"></p>
+<h5 id="5-堆排序"><a href="#5-堆排序" class="headerlink" title="5.  堆排序"></a>5.  堆排序</h5><p>堆排序是针对直接选择排序的改进。首先是介绍堆这种数据结构。</p>
+<p>堆可以表示为完全二叉树。特别重要的一点性质：任意的叶子节点小于（或大于）它所有的父节点。对此，又分为大顶堆和小顶堆，大顶堆要求节点的元素都要大于其孩子，小顶堆要求节点元素都小于其左右孩子，两者对左右孩子的大小关系不做任何要求。</p>
+<p>利用堆排序，就是基于大顶堆或者小顶堆的一种排序方法。</p>
+<p>算法的基本思想：使用大顶堆来完成</p>
+<ol>
+<li><p>首先将序列构建成为大顶堆；</p>
+<p>这样满足了大顶堆的性质：位于根节点的元素一定是当前序列的最大值</p>
+</li>
+<li><p>取出当前大顶堆的根节点，将其与序列末尾元素进行交换；</p>
+<p>此时：序列末尾的元素为已排序的最大值；由于交换了元素，当前位于根节点的堆并不一定满足大顶堆的性质</p>
+</li>
+<li><p>对上一步交换后的n-1个序列元素进行调整，使其满足大顶堆的性质；即重新构建大顶堆。</p>
+</li>
+<li><p>重复2.3步骤，直至堆中只有1个元素为止</p>
+</li>
+</ol>
+<p>代码如下，</p>
+<p><img src="/2018/02/12/排序/heap1.PNG" alt="heap1"></p>
+<p><img src="/2018/02/12/排序/heap2.PNG" alt="heap2"></p>
+<p>时间复杂度是O(nlogn) ，需要一个用来交换的暂存单元，是不稳定的排序。图2的第5行，<code>2*s</code>，是因为将完全二叉树按照层序遍历的顺序标号，那么某个结点序号为s，则左孩子序号是<code>2s</code>，右孩纸是<code>2s+1</code>。由于完全二叉树第i个节点到根节点的距离是log2i下取整后加一（深度），而需要设置堆顶n-1次，合起来得到时间复杂度O(nlogn)。</p>
+<h5 id="6-归并排序"><a href="#6-归并排序" class="headerlink" title="6.  归并排序"></a>6.  归并排序</h5><p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。通过先递归的分解数列，再合并数列就完成了归并排序。<br>归并排序的效率是比较高的，设数列长为N，将数列分开成小数列一共要logN步，每步都是一个合并有序数列的过程，时间复杂度可以记为O(N)，故一共为O(N*logN)。</p>
+<p>具体来说，考虑下如何将二个有序数列合并。其做法是，只要从比较二个数列的第一个数，谁小就先取谁，取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个数列的数据依次取出即可。</p>
+<p>具体实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将有二个有序数列a[first...mid]和a[mid...last]合并。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergearray</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> mid, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i = first, j = mid + <span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">int</span> m = mid,   n = last;  </span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> (i &lt;= m &amp;&amp; j &lt;= n)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt;= a[j])  </span><br><span class="line">            temp[k++] = a[i++];  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            temp[k++] = a[j++];  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> (i &lt;= m)  </span><br><span class="line">        temp[k++] = a[i++];  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> (j &lt;= n)  </span><br><span class="line">        temp[k++] = a[j++];  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)  </span><br><span class="line">        a[first + i] = temp[i];  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (first &lt; last)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">int</span> mid = (first + last) / <span class="number">2</span>;  </span><br><span class="line">        mergesort(a, first, mid, temp);    <span class="comment">//左边有序  </span></span><br><span class="line">        mergesort(a, mid + <span class="number">1</span>, last, temp); <span class="comment">//右边有序  </span></span><br><span class="line">        mergearray(a, first, mid, last, temp); <span class="comment">//再将二个有序数列合并  </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>[n];  </span><br><span class="line">    <span class="keyword">if</span> (p == <span class="literal">NULL</span>)  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">    mergesort(a, <span class="number">0</span>, n - <span class="number">1</span>, p);  </span><br><span class="line">    <span class="keyword">delete</span>[] p;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，可以使用迭代来非递归地进行排序，降低空间复杂度，具体请阅读大话数据结构的相关章节。</p>
+<h5 id="7-快速排序"><a href="#7-快速排序" class="headerlink" title="7.  快速排序"></a>7.  快速排序</h5><p>快排是对于冒泡的改进和加强。通过一趟排序将待排序的记录分割成独立的两部分，其中一部分记录的关键字均比另一部分记录的关键字小，则可分别对于这两部分记录继续进行排序，以达到整个序列有序的目的。<br>快速排序是C.R.A.Hoare于1962年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法。<br>该方法的基本思想是：<br>1．先从数列中取出一个数作为基准数。<br>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。<br>3．再对左右区间重复第二步，直到各区间只有一个数。<br>一个可以参考的实现如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//快速排序  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> s[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (l &lt; r)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">int</span> i = l, j = r, x = s[l];  </span><br><span class="line">        <span class="keyword">while</span> (i &lt; j)  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="keyword">while</span>(i &lt; j &amp;&amp; s[j] &gt;= x) <span class="comment">// 从右向左找第一个小于x的数  </span></span><br><span class="line">                j--;    </span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)   </span><br><span class="line">                s[i++] = s[j];  </span><br><span class="line">              </span><br><span class="line">            <span class="keyword">while</span>(i &lt; j &amp;&amp; s[i] &lt; x) <span class="comment">// 从左向右找第一个大于等于x的数  </span></span><br><span class="line">                i++;    </span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)   </span><br><span class="line">                s[j--] = s[i];  </span><br><span class="line">        &#125;  </span><br><span class="line">        s[i] = x;  </span><br><span class="line">        quick_sort(s, l, i - <span class="number">1</span>); <span class="comment">// 递归调用   </span></span><br><span class="line">        quick_sort(s, i + <span class="number">1</span>, r);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个实现是以第一个数为基准数的。有的实现是以中间的数作为基准数的，直接将中间的数和第一个数进行交换就可以了。快排时先由右往左，然后由左向右，如此交替进行。</p>
+<p>快排是不稳定的排序方法，时间复杂度为O(nlogn)。</p>
+<p>优化思路：第一是基准数的选取，可以先选出3个数，取其平均数来作为基准，尽可能让这个基准数靠近中央。第二是递归方面，尽量使用尾递归。</p>
+<h4 id="三-总结"><a href="#三-总结" class="headerlink" title="三 . 总结"></a>三 . 总结</h4><p>一图胜千言啊，下图总结了七类排序方法的特性。</p>
+<p> <img src="/2018/02/12/排序/table.PNG" alt="table"></p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/09/web安全/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhoufan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡少文集">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/09/web安全/" itemprop="url">web安全</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T11:51:53+08:00">
+                2018-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Web安全小结</p>
+<p>一. XSS(跨站脚本攻击)<br>利用漏洞，向网页里面插入恶意的<code>html</code>代码（脚本），就是<code>XSS (cross site script)</code>。它的攻击性体现在，可以用来修改DOM，打广告，获取cookie，诱导用户去钓鱼网站等等。它是一种在页面上生成<code>javascript</code>脚本来攻击的方式，相当于注入脚本，而在数据库里面注入<code>sql</code><br>语句，也是一种注入攻击。</p>
+<p>防御方法：所有用户输入的地方，必须做转码。比如<script>标签，转码<code>&amp;lt ;script &amp;gt ;</code>。</p>
+<p>这样就不会把脚本给正常解释出来了。这一步骤可以在保存到数据库之后进行。<br>不过，在富文本编辑器里面，由于很多东西具有格式，会天然地带有标签，这时候需要进行过滤标签。<br>白名单过滤：安全性更高。只允许哪几个标签不被转码。<br>黑名单过滤：规定转码的标签是哪些。<br>另外，可以在网站上线后，进行安全性检查，测试问题。</p>
+<p>二. 碰撞攻击<br>登陆注册页面的用户名和密码，如果直接给后端是不安全的，最起码要进行MD5加密。但是MD5会遭到碰撞攻击。比如数据库被盗取后，用已有的MD5字典去比对。这个字典叫做碰撞库。MD5加密的结果，无法直接去破解，但是可以使用字典进行字符串比对。</p>
+<p>三.</p>
+<p>四. AB通信问题</p>
+<p>这一类问题的描述方式是：A要给B一个啥啥啥，但是运送过程里面可能被C捣鬼，把这个东西给偷了，这时候AB 为之奈何。</p>
+<p>方案1：A给东西上锁a，给B，B拿到后也上一把锁b，然后送回给A，A打开锁a，然后再给B，B然后收到后，开锁b，即可。<br>方案2：加密分两大类，一是通信的加密，比如http协议加上了SSL/TLS，建立安全的通信线路。二是内容的加密，对于报文主体进行加密。加密的方法也分两个类别，一是共享密钥加密，AB共享一个密钥，加密解密是同一个密钥，即对称密钥加密。二是公开密钥加密，使用一组非对称的密钥，公钥和私钥是一组配套的密钥，A使用公钥加密，B使用私钥解密。HTTPS使用了两者混合加密。</p>
+</script></p>
           
         
       
@@ -870,7 +1007,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -883,7 +1020,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
